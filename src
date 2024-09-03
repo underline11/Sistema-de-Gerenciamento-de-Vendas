@@ -1,0 +1,96 @@
+-- 1. Criação do Banco de Dados
+CREATE DATABASE SistemaVendas;
+USE SistemaVendas;
+
+SHOW TABLES;
+
+DROP TABLE IF EXISTS Produtos;
+
+-- 2. Criação das Tabelas
+
+-- Criar Tabela de Produtos
+CREATE TABLE Produtos (
+    ProdutoID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10, 2) NOT NULL,
+    QuantidadeEstoque INT NOT NULL
+);
+
+-- Criar Tabela de Clientes
+CREATE TABLE Clientes (
+    ClienteID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100),
+    Telefone VARCHAR(20)
+);
+
+-- Criar Tabela de Vendas
+CREATE TABLE Vendas (
+    VendaID INT AUTO_INCREMENT PRIMARY KEY,
+    ProdutoID INT,
+    ClienteID INT,
+    QuantidadeVendida INT NOT NULL,
+    DataVenda DATE NOT NULL,
+    FOREIGN KEY (ProdutoID) REFERENCES Produtos(ProdutoID),
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+);
+
+
+-- 3. Inserção de Dados
+
+-- Inserindo Produtos
+INSERT INTO Produtos (Nome, Preco, QuantidadeEstoque) VALUES
+('Produto A', 10.50, 100),
+('Produto B', 25.00, 50),
+('Produto C', 15.75, 200);
+
+-- Inserindo Clientes
+INSERT INTO Clientes (Nome, Email, Telefone) VALUES
+('Cliente 1', 'cliente1@example.com', '123456789'),
+('Cliente 2', 'cliente2@example.com', '987654321');
+
+-- Inserindo Vendas
+INSERT INTO Vendas (ProdutoID, ClienteID, QuantidadeVendida, DataVenda) VALUES
+(1, 1, 2, '2024-09-01'),
+(2, 2, 1, '2024-09-02');
+
+-- 4. Consultas (SELECT)
+
+-- Selecionar todas as vendas
+SELECT * FROM Vendas;
+
+-- Selecionar todas as vendas com detalhes do cliente e produto
+SELECT V.VendaID, C.Nome AS Cliente, P.Nome AS Produto, V.QuantidadeVendida, V.DataVenda
+FROM Vendas V
+JOIN Clientes C ON V.ClienteID = C.ClienteID
+JOIN Produtos P ON V.ProdutoID = P.ProdutoID;
+
+-- 5. Atualização de Dados (UPDATE)
+
+-- Atualizar o preço de um produto
+UPDATE Produtos
+SET Preco = 12.00
+WHERE ProdutoID = 1;
+
+-- Atualizar o email de um cliente
+UPDATE Clientes
+SET Email = 'novoemail@example.com'
+WHERE ClienteID = 1;
+
+-- 6. Exclusão de Dados (DELETE)
+
+-- Excluir uma venda
+DELETE FROM Vendas
+WHERE VendaID = 1;
+
+-- Excluir um produto
+DELETE FROM Produtos
+WHERE ProdutoID = 3;
+
+-- 7. Junções (JOIN)
+
+-- Junção para listar todas as vendas com detalhes
+SELECT V.VendaID, C.Nome AS Cliente, P.Nome AS Produto, V.QuantidadeVendida, V.DataVenda
+FROM Vendas V
+JOIN Clientes C ON V.ClienteID = C.ClienteID
+JOIN Produtos P ON V.ProdutoID = P.ProdutoID;
