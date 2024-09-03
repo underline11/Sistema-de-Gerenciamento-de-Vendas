@@ -1,0 +1,19 @@
+
+---
+
+### .gitignore
+
+```gitignore
+# Ignore arquivos de banco de dados local
+*.db
+*.sql
+
+# Ignore configurações de ambiente e arquivos temporários
+.env
+*.log
+tmp/
+.cache/
+
+# Ignore arquivos do sistema operacional
+.DS_Store
+Thumbs.db
