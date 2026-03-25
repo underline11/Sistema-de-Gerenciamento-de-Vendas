@@ -40,10 +40,6 @@ Este projeto implementa um sistema de vendas básico utilizando SQL. O sistema �
 6. **Junções (JOIN):**
    - Consultas utilizando junções para exibir informações detalhadas sobre as vendas.
 
-## Como Usar
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/sistema-vendas-simples.git
 Importe o script SQL em seu servidor de banco de dados.
 
 Execute as consultas para criar o banco de dados, tabelas e inserir os dados.
